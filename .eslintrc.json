@@ -11,12 +11,10 @@
       "jsx": true
     }
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
-  "plugins": [
-    "react"
-  ]
+  "plugins": ["react"]
 }
