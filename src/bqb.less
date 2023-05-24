@@ -6,6 +6,25 @@
 .dragbox {
   position: absolute;
   cursor: move;
-//   top: 100px;
-//   left: 100px;
+  &.active{
+    // border: 1px solid blue;
+    box-shadow: 0 0 0 1px rgba(0,149,255,.5);
+  }
+  //   top: 100px;
+  //   left: 100px;
+}
+
+.bqb_cls {
+  white-space: pre-line;
+  margin-top: 20px;
+  width: 18em;
+  display: block;
+  margin-bottom: 20px;
+
+}
+
+html {
+  font-size: calc((100vw - 2px) / 4 - 2px);
+  font: 12px "PingFang SC", "Helvetica Neue", Arial, "Microsoft YaHei",
+    sans-serif;
 }

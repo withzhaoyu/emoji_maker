@@ -3,15 +3,15 @@ import img from "./images/geng.jpg";
 import _ from "lodash";
 import "./bqb.less";
 import createTextCanvas from "./text2canvas.js";
-// import
+import html2canvas from "html2canvas";
 
-const DrawComp = (props) => {
-  const [top, setTop] = useState(100);
-  const [left, setLeft] = useState(100);
-  const [text, setText] = useState("一切责任/n全在前端");
+const DrawComp = () => {
+  const [top, setTop] = useState(146);
+  const [left, setLeft] = useState(37);
+  const [text, setText] = useState("一切责任全在前端");
+  const [active, setActive] = useState(true);
   useEffect(() => {
-    // document.getElementById("textbox").removeChild(document.getElementById("textbox"));
-    console.log(document.getElementById("textbox"));
+    // console.log(document.getElementById("textbox"));
     if (!document.getElementById("textbox").childNodes.length) {
       document.getElementById("textbox").appendChild(createTextCanvas(text));
       return;
@@ -23,6 +23,7 @@ const DrawComp = (props) => {
         document.getElementById("textbox").childNodes[0]
       );
   }, [text]);
+
   const handleMove = (e) => {
     console.log(e);
     if (e.changedTouches) {
@@ -36,14 +37,31 @@ const DrawComp = (props) => {
       setLeft(e.clientX - 10);
     }
   };
+
+  const download = () => {
+    setActive(false);
+    html2canvas(document.getElementById("draw-content")).then(function (
+      canvas
+    ) {
+      var link = document.createElement("a");
+      document.body.appendChild(link);
+      link.download = text + ".jpg";
+      link.href = canvas.toDataURL();
+      link.target = "_blank";
+      link.click();
+      setActive(true);
+    });
+  };
+
   return (
     <>
-      <div className="draw-content">
-        <div id="draw" style={{ background: `url(${img})`, height: "100%" }}>
-          draw--area
-        </div>
+      <div className="draw-content" id="draw-content">
         <div
-          className="dragbox"
+          id="draw"
+          style={{ background: `url(${img})`, height: "100%" }}
+        ></div>
+        <div
+          className={active ? "dragbox active" : "dragbox"}
           id="textbox"
           draggable="true"
           style={{ top, left }}
@@ -52,7 +70,12 @@ const DrawComp = (props) => {
           onTouchMove={(e) => _.throttle(handleMove, 300)(e)}
         ></div>
       </div>
-      <input onChange={(e) => setText(e.target.value)} value={text} />
+      <textarea
+        className="bqb_cls"
+        onChange={(e) => setText(e.target.value)}
+        value={text}
+      />
+      <button onClick={download}>生成图片</button>
     </>
   );
 };

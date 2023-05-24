@@ -4,6 +4,5 @@ import App from "./App.jsx";
 import "./styles.css";
 import "./styles.less";
 
-
 var mountNode = document.getElementById("app");
-ReactDOM.render(<App name="Jane" />, mountNode);
+ReactDOM.render(<App />, mountNode);

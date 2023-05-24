@@ -46,10 +46,12 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       templateContent: ({ htmlWebpackPlugin }) =>
-        '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' +
+        '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,user-scalable=0"><title>' +
         htmlWebpackPlugin.options.title +
         '</title></head><body><div id="app"></div></body></html>',
       filename: "index.html",
+      title:'表情包制作？',
+      favicon:'./src/images/bg.jpg'
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new LodashModuleReplacementPlugin(),
