@@ -1,69 +1,59 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 
 const config = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/index.js'
-  ],
+  entry: ["react-hot-loader/patch", "./src/index.js"],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
+        use: "babel-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'less-loader'
-        ]
+        use: ["style-loader", "css-loader", "less-loader"],
       },
       {
-        test: /\.png$/,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'url-loader',
-            options: {
-              mimetype: 'image/png'
-            }
-          }
-        ]
+            loader: "file-loader",
+          },
+        ],
       },
       {
         test: /\.svg$/,
-        use: 'file-loader'
-      }
-    ]
+        use: "file-loader",
+      },
+    ],
   },
   devServer: {
-    'static': {
-      directory: './dist'
-    }
+    static: {
+      directory: "./dist",
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id=\"app\"></div></body></html>',
-      filename: 'index.html',
+      templateContent: ({ htmlWebpackPlugin }) =>
+        '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' +
+        htmlWebpackPlugin.options.title +
+        '</title></head><body><div id="app"></div></body></html>',
+      filename: "index.html",
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-    new LodashModuleReplacementPlugin
-  ]
+    new LodashModuleReplacementPlugin(),
+  ],
 };
 
 module.exports = config;
