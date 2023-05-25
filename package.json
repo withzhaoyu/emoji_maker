@@ -18,12 +18,14 @@
     "babel-plugin-add-module-exports": "^1.0.4",
     "babel-plugin-import": "^1.13.6",
     "fontsource-roboto": "^4.0.0",
+    "gif.js": "^0.2.0",
     "html2canvas": "^1.4.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-hot-loader": "^4.13.1"
+    "react-hot-loader": "^4.13.1",
+    "react-router-dom": "^5.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",

@@ -39,6 +39,8 @@ export default function createTextCanvas(
   context.font = fontOptions.font;
   // 设置字体颜色
   context.fillStyle = fontOptions.color;
+  //   context.fillStyle = "hsl(,100%,100%)";
+
   if (is3D) {
     var n;
     //绘制底层

@@ -42,6 +42,8 @@ const config = {
     static: {
       directory: "./dist",
     },
+    hot:true,
+    historyApiFallback:true,
   },
   plugins: [
     new HtmlWebpackPlugin({
