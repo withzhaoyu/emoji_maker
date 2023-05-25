@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import img from "./images/geng.jpg";
 import _ from "lodash";
 import "./bqb.less";
@@ -10,8 +10,8 @@ const DrawComp = () => {
   const [left, setLeft] = useState(37);
   const [text, setText] = useState("一切责任全在前端");
   const [active, setActive] = useState(true);
+
   useEffect(() => {
-    // console.log(document.getElementById("textbox"));
     if (!document.getElementById("textbox").childNodes.length) {
       document.getElementById("textbox").appendChild(createTextCanvas(text));
       return;
@@ -25,16 +25,18 @@ const DrawComp = () => {
   }, [text]);
 
   const handleMove = (e) => {
-    console.log(e);
+    if (e.type) {
+      console.log(e.type);
+    }
     if (e.changedTouches) {
-      setTop(e.changedTouches[0].clientY);
-      setLeft(e.changedTouches[0].clientX);
+      setTop(e.changedTouches[0].clientY - 20);
+      setLeft(e.changedTouches[0].clientX - 50);
     } else {
       if (!e.clientY) {
         return;
       }
       setTop(e.clientY - 10);
-      setLeft(e.clientX - 10);
+      setLeft(e.clientX - 30);
     }
   };
 
@@ -66,8 +68,8 @@ const DrawComp = () => {
           draggable="true"
           style={{ top, left }}
           onTouchStart={console.log}
-          onDrag={(e) => _.throttle(handleMove, 300)(e)}
-          onTouchMove={(e) => _.throttle(handleMove, 300)(e)}
+          onDrag={handleMove}
+          onTouchMove={handleMove}
         ></div>
       </div>
       <textarea
@@ -79,5 +81,18 @@ const DrawComp = () => {
     </>
   );
 };
+
+function useThrottle(cb, delay) {
+  const options = { leading: true, trailing: false }; // add custom lodash options
+  const cbRef = useRef(cb);
+  // use mutable ref to make useCallback/throttle not depend on `cb` dep
+  useEffect(() => {
+    cbRef.current = cb;
+  });
+  return useCallback(
+    _.throttle((...args) => cbRef.current(...args), delay, options),
+    [delay]
+  );
+}
 
 export default DrawComp;
