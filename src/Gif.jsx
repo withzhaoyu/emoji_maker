@@ -10,6 +10,8 @@ const GifComp = () => {
   const [text2, setText2] = useState("狂粉");
   const [text3, setText3] = useState("死忠粉");
 
+  useEffect(() => {}, [text, text2, text3]);
+
   const imgRef = useRef(null);
 
   const gifRef = useRef(null);
@@ -18,7 +20,6 @@ const GifComp = () => {
     imgRef.current.onload = function () {
       genGIF();
     };
-    console.log(gifimage);
   }, []);
 
   const genGIF = () => {
@@ -110,6 +111,9 @@ const GifComp = () => {
         onChange={(e) => setText3(e.target.value)}
         value={text3}
       />
+      <div></div>
+      <button onClick={genGIF}>预览</button>
+
       <div className="line-through">长按图片保存或者点击👇🏻生成</div>
       <button onClick={download}>生成图片</button>
     </>
