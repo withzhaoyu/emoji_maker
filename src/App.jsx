@@ -1,10 +1,10 @@
 import React from "react";
 import DrawComp from "./DrawBQB.jsx";
-import GifComp from "./Gif.jsx";
+import LightSignGif from "./lightSignGif.jsx";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-const App = (props) => {
+const App = () => {
   return (
     <Router>
       <Switch>
@@ -12,7 +12,7 @@ const App = (props) => {
           <DrawComp />
         </Route>
         <Route path="/gif">
-          <GifComp />
+          <LightSignGif />
         </Route>
         <Route path="/">
           <nav>

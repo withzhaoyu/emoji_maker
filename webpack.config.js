@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -12,6 +13,10 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [{ loader: "url-loader", options: { limit: 8192 } }],
+      },
+      {
         test: /\.(js|jsx)$/,
         use: "babel-loader",
         exclude: /node_modules/,
@@ -25,14 +30,6 @@ const config = {
         use: ["style-loader", "css-loader", "less-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: "file-loader",
-          },
-        ],
-      },
-      {
         test: /\.svg$/,
         use: "file-loader",
       },
@@ -42,8 +39,8 @@ const config = {
     static: {
       directory: "./dist",
     },
-    hot:true,
-    historyApiFallback:true,
+    hot: true,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -52,8 +49,8 @@ const config = {
         htmlWebpackPlugin.options.title +
         '</title></head><body><div id="app"></div></body></html>',
       filename: "index.html",
-      title:'表情包制作？',
-      favicon:'./src/images/bg.jpg'
+      title: "表情包制作？",
+      favicon: "./src/images/8bit.svg",
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new LodashModuleReplacementPlugin(),

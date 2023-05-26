@@ -1,6 +1,5 @@
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useState } from "react";
 import img from "./images/geng.jpg";
-import _ from "lodash";
 import "./bqb.less";
 import createTextCanvas from "./text2canvas.js";
 import html2canvas from "html2canvas";

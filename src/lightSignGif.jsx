@@ -5,18 +5,21 @@ import "./gif.less";
 import GIF from "gif.js";
 import { HUE } from "./constant.js";
 
-const GifComp = () => {
+const LightSignGif = () => {
   const [text, setText] = useState("蔡徐坤");
-  const [text2, setText2] = useState("狂粉");
-  const [text3, setText3] = useState("死忠粉");
-
-  useEffect(() => {}, [text, text2, text3]);
+  const [leftText, setLeft] = useState("狂粉");
+  const [rightText, setRight] = useState("死忠粉");
 
   const imgRef = useRef(null);
-
   const gifRef = useRef(null);
 
   useEffect(() => {
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      setTimeout(
+        () => alert("如果示例图没有动的话，功能不可用，暂未支持移动端"),
+        2000
+      );
+    }
     imgRef.current.onload = function () {
       genGIF();
     };
@@ -36,8 +39,8 @@ const GifComp = () => {
       context.filter = `hue-rotate(${i}deg)`;
       context.drawImage(imgRef.current, 0, 0, 200, 200);
 
+      //灯牌字
       context.font = "45px sans-serif";
-      // 设置字体颜色
       context.fillStyle = "white";
       context.fillStyle = "transform: rotate(10deg)";
       context.filter = `hue-rotate(${i}deg)`;
@@ -46,11 +49,11 @@ const GifComp = () => {
       context.rotate((7 * Math.PI) / 180);
       context.fillText(text, 35, 50);
 
+      //左右字
       context.rotate((-7 * Math.PI) / 180);
       context.font = "16px sans-serif";
-      context.fillText(text2, 5, 190);
-
-      context.fillText(text3, 140, 190);
+      context.fillText(leftText, 5, 190);
+      context.fillText(rightText, 140, 190);
 
       gif.addFrame(canvas, { delay: 100 });
     });
@@ -59,13 +62,12 @@ const GifComp = () => {
       let x = document.createElement("img");
       x.src = URL.createObjectURL(blob);
       gifRef.current = URL.createObjectURL(blob);
-      if (!document.getElementById("gif2").children.length) {
-        document.getElementById("gif2").append(x);
+      let canvasDom = document.getElementById("git_canvas");
+      if (!canvasDom.children.length) {
+        canvasDom.append(x);
         return;
       } else {
-        document
-          .getElementById("gif2")
-          .replaceChild(x, document.getElementById("gif2").children[0]);
+        canvasDom.replaceChild(x, canvasDom.children[0]);
       }
     });
 
@@ -81,11 +83,7 @@ const GifComp = () => {
 
   return (
     <>
-      <div className="gif-content">
-        <div id="git1"></div>
-      </div>
-      <div id="gif2"></div>
-
+      <div id="git_canvas"></div>
       <img
         ref={imgRef}
         src={gifimage}
@@ -102,14 +100,14 @@ const GifComp = () => {
       <p>下左字</p>
       <input
         className="gif_input"
-        onChange={(e) => setText2(e.target.value)}
-        value={text2}
+        onChange={(e) => setLeft(e.target.value)}
+        value={leftText}
       />
       <p>下右字</p>
       <input
         className="gif_input"
-        onChange={(e) => setText3(e.target.value)}
-        value={text3}
+        onChange={(e) => setRight(e.target.value)}
+        value={rightText}
       />
       <div></div>
       <button onClick={genGIF}>预览</button>
@@ -120,4 +118,4 @@ const GifComp = () => {
   );
 };
 
-export default GifComp;
+export default LightSignGif;
