@@ -4,6 +4,8 @@ import _ from "lodash";
 import "./gif.less";
 import GIF from "gif.js";
 import { HUE } from "./constant.js";
+import 'context-filter-polyfill';
+
 
 const LightSignGif = () => {
   const [text, setText] = useState("蔡徐坤");
@@ -14,12 +16,6 @@ const LightSignGif = () => {
   const gifRef = useRef(null);
 
   useEffect(() => {
-    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-      setTimeout(
-        () => alert("如果示例图没有动的话，功能不可用，暂未支持移动端"),
-        2000
-      );
-    }
     imgRef.current.onload = function () {
       genGIF();
     };
@@ -38,7 +34,6 @@ const LightSignGif = () => {
       let context = canvas.getContext("2d");
       context.filter = `hue-rotate(${i}deg)`;
       context.drawImage(imgRef.current, 0, 0, 200, 200);
-
       //灯牌字
       context.font = "45px sans-serif";
       context.fillStyle = "white";
