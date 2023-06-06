@@ -1,0 +1,24 @@
+@font-face {
+  font-family: Zpix;
+  src: url(zpix-split.woff);
+}
+
+@font-face {
+  font-family: pingfang;
+  src: url(pingfang.woff);
+}
+/* :root {
+    --max-width: 500px;
+  } */
+/* html {
+    font: 400 12px/1.4 ZpixLocal, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: none;
+    font-feature-settings: "tnum";
+    background-color: #eefee4;
+    background-image: linear-gradient(45deg, #e0ffde 0%, #fafedd 100%);
+    color: #215200;
+  } */
