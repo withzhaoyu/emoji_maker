@@ -1,6 +1,12 @@
-# empty-project
+# 打call图
 
-Empty project.
+make gif like this
+
+![call.gif](http://124.221.2.237:8080/yyds.gif)
+
+demo online [http://124.221.2.237/gif](http://124.221.2.237/gif).
+
+
 
 ## Building and running on localhost
 
@@ -25,13 +31,5 @@ npm run build-prod
 To create a development build:
 
 ```sh
-npm run build-dev
+npm run start
 ```
-
-## Running
-
-Open the file `dist/index.html` in your browser
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
