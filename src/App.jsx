@@ -18,13 +18,13 @@ const App = () => {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">首页</Link>
               </li>
               <li>
-                <Link to="/gif">gif</Link>
+                <Link to="/gif">打call图生成</Link>
               </li>
               <li>
-                <Link to="/draw">draw</Link>
+                <Link to="/draw">梗图生成</Link>
               </li>
             </ul>
           </nav>
